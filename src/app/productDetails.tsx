@@ -1,15 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   ScrollView,
   View,
   Text,
   Image,
   TouchableOpacity,
-  Animated,
+  Animated
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useFocusEffect } from '@react-navigation/native';
 
 const products = [
   {
@@ -61,12 +62,35 @@ const recommendedProducts = [
   },
 ];
 
-export default function ProductDetails() {
+const normalizeSource = (img) => {
+  if (typeof img === 'string') {
+    return img.toLowerCase().replace(/^file:\/\//, '');
+  }
+  if (img?.uri) {
+    return img.uri.toLowerCase().replace(/^file:\/\//, '');
+  }
+  return null;
+};
+
+const isSameImage = (img1, img2) => {
+  const src1 = normalizeSource(img1);
+  const src2 = normalizeSource(img2);
+  return src1 !== null && src2 !== null && src1 == src2;
+};
+
+export default function ProductDetails( ) {
+
   const { id } = useLocalSearchParams();
+  
   const product = products.find((p) => p.id === id);
+
+  const router = useRouter();
+
+  
   const [selectedSize, setSelectedSize] = useState("S");
 
   const [isFilled, setIsFilled] = useState(false);
+  
   const scaleValue = useRef(new Animated.Value(1)).current;
 
   const handlePress = () => {
@@ -86,21 +110,40 @@ export default function ProductDetails() {
     setIsFilled(!isFilled);
   };
 
-  const [mainImage, setMainImage] = useState(product.mainImage);
+  const getInitialMainImage = () =>
+    product && (product.mainImage || (product.previewImages && product.previewImages[0]) || null);
 
-  const handlePreviewPress = (img) => {
+  const [mainImage, setMainImage] = useState(getInitialMainImage());
+
+  const previewImages = (product?.previewImages || []).map((img, index) => ({
+    image: img,
+    key: index.toString(),
+  }));
+
+  const [selectedImageKey, setSelectedImageKey] = useState(
+    previewImages.find(({ image }) => isSameImage(mainImage, image))?.key || previewImages[0]?.key
+  );
+  
+  const handlePreviewPress = (img, key) => {
     setMainImage(img);
+    setSelectedImageKey(key);
   };
+  
+  useFocusEffect(
+    useCallback(() => {
+      const refreshedImage = getInitialMainImage();
+      setMainImage(refreshedImage);
+      const initialKey = previewImages.find(({ image }) => isSameImage(refreshedImage, image))?.key || previewImages[0]?.key;
+      setSelectedImageKey(initialKey);
+    }, [id])
+  );
 
   if (!product) {
     return (
       <SafeAreaView className="flex-1 bg-white px-4">
         <View className="flex-row items-center justify-between mb-8 pt-4 mx-4">
           <Link href="/" asChild>
-            <TouchableOpacity
-              className="bg-gray-50 p-3 rounded-full"
-              activeOpacity={0.8}
-            >
+            <TouchableOpacity className="bg-gray-50 p-3 rounded-full" activeOpacity={0.8}>
               <FontAwesome name="arrow-left" size={20} color="#4b5563" />
             </TouchableOpacity>
           </Link>
@@ -110,40 +153,17 @@ export default function ProductDetails() {
             Oops! We couldn't find that product
           </Text>
           <Text className="text-lg text-gray-600 text-center mb-8 px-8">
-            Looks like this item got away. Check out these great alternatives
-            instead!
+            Looks like this item got away. Check out these great alternatives instead!
           </Text>
           <View className="w-full mb-8">
-            <Text className="text-xl font-semibold text-gray-800 mb-4">
-              Trending products
-            </Text>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              className="flex-row justify-center"
-            >
+            <Text className="text-xl font-semibold text-gray-800 mb-4">Trending products</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row justify-center">
               {recommendedProducts.map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/productDetails?id=${product.id}`}
-                  asChild
-                >
-                  <TouchableOpacity
-                    key={product.id}
-                    className="rounded-xl p-4 mr-4"
-                    activeOpacity={0.8}
-                  >
-                    <Image
-                      source={product.image}
-                      style={{ width: 160, height: 160 }}
-                      className="w-32 h-32 rounded-lg mb-2"
-                    />
-                    <Text className="font-medium text-gray-800 text-center">
-                      {product.name}
-                    </Text>
-                    <Text className="text-primary font-bold text-center">
-                      {product.price}
-                    </Text>
+                <Link key={product.id} href={`/productDetails?id=${product.id}`} asChild>
+                  <TouchableOpacity className="rounded-xl p-4 mr-4" activeOpacity={0.8}>
+                    <Image source={product.image} style={{ width: 160, height: 160 }} className="w-32 h-32 rounded-lg mb-2" />
+                    <Text className="font-medium text-gray-800 text-center">{product.name}</Text>
+                    <Text className="text-primary font-bold text-center">{product.price}</Text>
                   </TouchableOpacity>
                 </Link>
               ))}
@@ -156,6 +176,7 @@ export default function ProductDetails() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
+
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}
         className="bg-white"
@@ -185,34 +206,37 @@ export default function ProductDetails() {
           </Animated.View>
         </View>
 
-        <Image
+        {mainImage && (<Image
           source={mainImage}
           style={{ width: 450, height: 600 }}
           className="w-full h-auto rounded-lg mt-4 relative top-[-90px]"
+          onError={() => console.warn('Failed to load main image')}
         />
+        )}
 
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           className="flex justify-center mt-4 relative top-[-180px] rounded-md"
         >
-          {product.previewImages.map((img, index) => (
+          {previewImages.map(({ image, key }) => {
+            const isActive = key == selectedImageKey;
+            return (
             <TouchableOpacity
-              key={index}
-              onPress={() => handlePreviewPress(img)}
-              className={`border-4 border-white rounded-md ${
-                mainImage === img ? 'border-amber-900' : 'border-white'
-              }`}
+              key={key}
+              onPress={() =>  handlePreviewPress(image, key)}
+              className={`border-4 rounded-md ${isActive ? 'border-amber-900' : 'border-white'}`}
               activeOpacity={0.8}
             >
               <Image
-                source={img}
+                source={image}
                 style={{ width: 48, height: 48 }}
                 className="w-10 h-10 rounded-md"
-                resizeMode="cover"
+                onError={() => console.warn('Failed to load preview image')}
               />
             </TouchableOpacity>
-          ))}
+           );
+          })}
         </ScrollView>
 
         <View className="flex-row items-center justify-between -mt-[140px]">
@@ -222,8 +246,7 @@ export default function ProductDetails() {
               source={require("../assets/icons/star.png")}
               style={{
                 width: 12,
-                height: 12,
-                resizeMode: "contain",
+                height: 12
               }}
             />
             {product.rating}
