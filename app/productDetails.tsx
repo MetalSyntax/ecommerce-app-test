@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   Animated,
   StatusBar,
-  Modal
+  Modal,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { Link, useLocalSearchParams, useRouter } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from '@react-navigation/native';
 import styles from './stylesProductDetails';
@@ -96,8 +96,6 @@ export default function ProductDetails( ) {
   
   const product = products.find((p) => p.id === id);
 
-  const router = useRouter();
-
   const [modalVisible, setModalVisible] = useState(false);
   
   const [selectedSize, setSelectedSize] = useState("S");
@@ -154,6 +152,12 @@ export default function ProductDetails( ) {
   if (!product) {
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar
+        animated={true}
+        backgroundColor="#FFF"
+        barStyle='dark-content'
+        showHideTransition='fade'
+      />
       {/* Header Back Button */}
       <View style={styles.header}>
         <Link href="/" asChild>
@@ -206,7 +210,12 @@ export default function ProductDetails( ) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-    <StatusBar barStyle='dark-content' />
+        <StatusBar
+          animated={true}
+          backgroundColor="#704f38"
+          barStyle='light-content'
+          showHideTransition='fade'
+        />
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         style={styles.scrollView}

@@ -9,13 +9,15 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from './stylesIndex';
+import styles from "./stylesIndex";
 
 const { width } = Dimensions.get("window");
+
 const availableWidth = width - 32;
 
 const banners = [
@@ -28,29 +30,29 @@ const banners = [
   },
   {
     id: "2",
-    title: "New Collection",
-    subtitle: "Discount 50% for\n first transaction",
+    title: "Latest Trends",
+    subtitle: "Save 40% on\n all new arrivals today",
     button: "Shop Now",
     img: require("../assets/banners/banner2.jpg"),
   },
   {
     id: "3",
-    title: "New Collection",
-    subtitle: "Discount 50% for\n first transaction",
+    title: "Trending Styles",
+    subtitle: "Enjoy 30% off\n on select items all week",
     button: "Shop Now",
     img: require("../assets/banners/banner3.jpg"),
   },
   {
     id: "4",
-    title: "New Collection",
-    subtitle: "Discount 50% for\n first transaction",
+    title: "Modern Classics",
+    subtitle: "Grab 45% off\n on top selections today",
     button: "Shop Now",
     img: require("../assets/banners/banner4.jpg"),
   },
   {
     id: "5",
-    title: "New Collection",
-    subtitle: "Discount 50% for\n first transaction",
+    title: "Exclusive Drops",
+    subtitle: "Get 35% off\n when you shop online today",
     button: "Shop Now",
     img: require("../assets/banners/banner5.jpg"),
   },
@@ -62,29 +64,36 @@ const products = [
     name: "Light Brown Jacket",
     price: "$83.97",
     image: require("../assets/products/jacket-woman-1.jpg"),
-    tags: ["Newest", "Woman"], 
+    tags: ["Newest", "Woman"],
   },
   {
     id: "2",
     name: "Black Leather Jacket",
     price: "$99.99",
     image: require("../assets/products/jacket-men-1.jpg"),
-    tags: ["Newest", "Man"], 
+    tags: ["Newest", "Man"],
   },
   {
     id: "3",
     name: "Beige Trench Coat",
     price: "$129.99",
     image: require("../assets/products/placeholder-image.jpg"),
-    tags: ["Popular", "Woman"], 
+    tags: ["Popular", "Woman"],
   },
   {
     id: "4",
     name: "Navy Blue Blazer",
     price: "$149.95",
     image: require("../assets/products/placeholder-image.jpg"),
-    tags: ["Popular", "Man"], 
-  }
+    tags: ["Popular", "Man"],
+  },
+];
+
+const categories = [
+  { id: "1", title: "T-Shirt", icon: require("../assets/icons/tshirt.png") },
+  { id: "2", title: "Pant", icon: require("../assets/icons/pant.png") },
+  { id: "3", title: "Dress", icon: require("../assets/icons/dress.png") },
+  { id: "4", title: "Jacket", icon: require("../assets/icons/jacket.png") },
 ];
 
 const filterProducts = (products, activeFilter) => {
@@ -137,21 +146,18 @@ const CountdownTimer = ({ targetTime }) => {
 };
 
 export default function Home() {
-  const categories = [
-    { id: "1", title: "T-Shirt", icon: require("../assets/icons/tshirt.png") },
-    { id: "2", title: "Pant", icon: require("../assets/icons/pant.png") },
-    { id: "3", title: "Dress", icon: require("../assets/icons/dress.png") },
-    { id: "4", title: "Jacket", icon: require("../assets/icons/jacket.png") },
-  ];
-
   const targetTime = new Date();
+
   targetTime.setHours(targetTime.getHours() + 1);
 
   const [selectedFilter, setSelectedFilter] = useState("Newest");
 
   const scrollViewRef = useRef(null);
+
   const scrollX = useRef(new Animated.Value(0)).current;
+
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const currentIndexRef = useRef(0);
 
   const onMomentumScrollEnd = (e) => {
@@ -160,7 +166,6 @@ export default function Home() {
     setCurrentIndex(index);
     currentIndexRef.current = index;
   };
-
   useEffect(() => {
     const interval = setInterval(() => {
       let nextIndex = currentIndexRef.current + 1;
@@ -174,23 +179,23 @@ export default function Home() {
       setCurrentIndex(nextIndex);
       currentIndexRef.current = nextIndex;
     }, 5000);
-
     return () => clearInterval(interval);
   }, [banners.length]);
 
   const [activeTab, setActiveTab] = useState("Home");
+
   const scaleValue = new Animated.Value(1);
 
-  const handlePress = (tabName) => {
+  const handlePress = (tabName: string) => {
     Animated.sequence([
       Animated.spring(scaleValue, {
         toValue: 0.8,
-        friction: 3,
+        friction: 2,
         useNativeDriver: true,
       }),
       Animated.spring(scaleValue, {
         toValue: 1,
-        friction: 3,
+        friction: 2,
         useNativeDriver: true,
       }),
     ]).start(() => setActiveTab(tabName));
@@ -205,7 +210,9 @@ export default function Home() {
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const [selectedLocation, setSelectedLocation] = useState("New York, USA");
+
   const rotateAnim = useState(new Animated.Value(0))[0];
 
   const cities = ["New York, USA", "Miami, USA", "California, USA"];
@@ -237,6 +244,12 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.safeAreaViewMain}>
+      <StatusBar
+        animated={true}
+        backgroundColor="#FFF"
+        barStyle="dark-content"
+        showHideTransition="fade"
+      />
       <ScrollView style={styles.scrollViewMain}>
         <View style={styles.headerContainer}>
           <View style={styles.locationWrapper}>
@@ -334,7 +347,7 @@ export default function Home() {
                   key={banner.id}
                   style={{ width: availableWidth, aspectRatio: 16 / 9 }}
                   resizeMode="cover"
-                  activeOpacity={1}
+                  activeOpacity={0.95}
                 >
                   <ImageBackground
                     source={banner.img}

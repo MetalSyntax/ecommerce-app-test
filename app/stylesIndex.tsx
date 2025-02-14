@@ -121,7 +121,6 @@ export default StyleSheet.create({
         height: "100%",
         borderRadius: 8, 
         justifyContent: "center",
-        padding: 16, 
       },
       bannerImageOverlay: {
         borderRadius: 8,
@@ -129,19 +128,28 @@ export default StyleSheet.create({
       bannerTextTitle: {
         fontSize: 18, 
         fontWeight: "700", 
-        color: "#ffffff", 
+        color: "#ffffff",
+        paddingHorizontal: 16,
+        textShadowColor: 'rgba(0,0,0,0.3)',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 2,
       },
       bannerTextSubtitle: {
         fontSize: 14, 
         color: "#ffffff", 
         marginTop: 4,
+        paddingHorizontal: 16,
+        textShadowColor: 'rgba(0,0,0,0.3)',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 2,
       },
       bannerButton: {
         marginTop: 8, 
         backgroundColor: "#704f3a", 
         padding: 8, 
         borderRadius: 6, 
-        alignSelf: "flex-start", 
+        alignSelf: "flex-start",
+        marginHorizontal: 16
       },
       bannerButtonText: {
         color: "#ffffff", 
@@ -235,7 +243,8 @@ export default StyleSheet.create({
         fontSize: 12, 
         color: "#6b7280", 
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
       },
       filterScrollView: {
         marginTop: 16, 
@@ -307,13 +316,13 @@ export default StyleSheet.create({
       productTag: {
         paddingHorizontal: 8,
         paddingVertical: 4,
-        backgroundColor: "#faf1ef", 
+        backgroundColor: "#f7f2ef", 
         borderRadius: 9999,
         marginRight: 4, 
       },
       productTagText: {
         fontSize: 12, 
-        color: "#78350f", 
+        color: "#836650", 
       },
       // Mensaje de Productos No Encontrados
       noProductsContainer: {
@@ -336,13 +345,12 @@ export default StyleSheet.create({
         right: 16,
       },
       bottomNavBar: {
-        backgroundColor: "#1f1f2b", // bg-black
-        borderRadius: 9999, // rounded-full
-        padding: 12, // p-3
+        backgroundColor: "#1f1f2b", 
+        borderRadius: 9999,
+        padding: 12, 
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        // Sombra (iOS y Android)
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
@@ -366,6 +374,7 @@ export default StyleSheet.create({
       bottomNavIconActive: {
         backgroundColor: "#fcfffe", 
       },
+      //Timer
       parentTimer: {
         backgroundColor: "#e6e1d5", 
         padding: 8,

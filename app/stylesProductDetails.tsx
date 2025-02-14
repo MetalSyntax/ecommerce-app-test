@@ -128,7 +128,12 @@ export default StyleSheet.create({
   titleFull: {
     fontSize: 18,
     fontWeight: '600',
+    padding: 5,
+    borderRadius: 5,
     backgroundColor: '#ffffff7a',
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   heartButton: {
     padding: 8, 
