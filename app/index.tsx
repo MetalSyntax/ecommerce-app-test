@@ -548,7 +548,7 @@ const styles = StyleSheet.create({
   },
   scrollViewMain: {
     backgroundColor: "#fff",
-    padding: 4,
+    paddingVertical: 4,
     marginBottom: 80,
   },
   //Header
@@ -557,6 +557,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     zIndex: 50,
+    marginHorizontal: 16,
   },
   locationWrapper: {
     position: "relative",
@@ -619,33 +620,34 @@ const styles = StyleSheet.create({
   },
   // Search
   searchBarContainer: {
-    marginVertical: 16, // my-4
-    flexDirection: "row", // flex-row
-    alignItems: "center", // items-center
+    marginVertical: 16, 
+    flexDirection: "row", 
+    alignItems: "center", 
+    marginHorizontal: 16,
   },
   searchInputWrapper: {
-    flexDirection: "row", // flex-row
-    alignItems: "center", // items-center
-    flex: 1, // flex-1
-    borderColor: "#e5e7eb", // border-gray-200
-    borderWidth: 1, // border
-    borderRadius: 12, // rounded-xl
-    paddingHorizontal: 16, // px-4
-    paddingVertical: 8, // py-2
-    backgroundColor: "#fff", // bg-white
+    flexDirection: "row", 
+    alignItems: "center", 
+    flex: 1,
+    borderColor: "#e5e7eb",
+    borderWidth: 1,
+    borderRadius: 12, 
+    paddingHorizontal: 16, 
+    paddingVertical: 8,
+    backgroundColor: "#fff", 
   },
   searchInput: {
-    marginLeft: 8, // ml-2
-    fontSize: 16, // text-base
-    color: "#1f2937", // text-gray-800
-    flex: 1, // flex-1
+    marginLeft: 8, 
+    fontSize: 16, 
+    color: "#1f2937", 
+    flex: 1, 
   },
   settingsButton: {
-    marginLeft: 8, // ml-2
-    backgroundColor: "#78350f", // bg-yellow-900
-    borderRadius: 8, // rounded-lg
-    paddingHorizontal: 12, // px-3
-    paddingVertical: 8, // py-2
+    marginLeft: 8, 
+    backgroundColor: "#78350f", 
+    borderRadius: 8,
+    paddingHorizontal: 12, 
+    paddingVertical: 8, 
   },
   settingsIcon: {
     width: 24,
@@ -654,43 +656,43 @@ const styles = StyleSheet.create({
   },
   // Banner
   carouselContainer: {
-    marginTop: 16, // mt-4
+    marginTop: 16, 
   },
   bannerImage: {
     width: "100%",
     height: "100%",
-    borderRadius: 8, // rounded-lg
+    borderRadius: 8, 
     justifyContent: "center",
-    padding: 16, // p-4
+    padding: 16, 
   },
   bannerImageOverlay: {
     borderRadius: 8,
   },
   bannerTextTitle: {
-    fontSize: 18, // text-lg
-    fontWeight: "700", // font-bold
-    color: "#ffffff", // text-white
+    fontSize: 18, 
+    fontWeight: "700", 
+    color: "#ffffff", 
   },
   bannerTextSubtitle: {
-    fontSize: 14, // text-sm
-    color: "#ffffff", // text-white
+    fontSize: 14, 
+    color: "#ffffff", 
     marginTop: 4,
   },
   bannerButton: {
-    marginTop: 8, // mt-2
-    backgroundColor: "#78350f", // bg-yellow-900
-    padding: 8, // p-2
-    borderRadius: 6, // rounded-md
-    alignSelf: "flex-start", // w-fit
+    marginTop: 8, 
+    backgroundColor: "#78350f", 
+    padding: 8, 
+    borderRadius: 6, 
+    alignSelf: "flex-start", 
   },
   bannerButtonText: {
-    color: "#ffffff", // text-white
+    color: "#ffffff", 
     textAlign: "center",
   },
   paginationContainer: {
-    flexDirection: "row", // flex-row
-    justifyContent: "center", // justify-center
-    marginTop: 8, // mt-2
+    flexDirection: "row", 
+    justifyContent: "center", 
+    marginTop: 8, 
   },
   paginationDot: {
     height: 8,
@@ -701,65 +703,65 @@ const styles = StyleSheet.create({
   },
   // Contenedor general de la pantalla
   screenSection: {
-    marginTop: 24, // mt-6
+    marginTop: 24, 
   },
   // Encabezado de Categorías
   categoryHeaderRow: {
-    flexDirection: "row", // flex-row
-    justifyContent: "space-between", // justify-between
-    alignItems: "center", // items-center
-    marginHorizontal: 16, // mx-4
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginHorizontal: 16, 
   },
   categoryTitle: {
-    fontSize: 18, // text-lg
-    fontWeight: "600", // font-semibold
-    color: "#1f2937", // text-gray-800
+    fontSize: 18, 
+    fontWeight: "600", 
+    color: "#1f2937", 
   },
   categorySeeAllButton: {
-    flexDirection: "row", // flex-row
-    alignItems: "center", // items-center
+    flexDirection: "row", 
+    alignItems: "center", 
   },
   categorySeeAllText: {
-    fontSize: 14, // text-sm
-    color: "#78350f", // text-amber-900
-    fontWeight: "500", // font-medium
+    fontSize: 14, 
+    color: "#78350f", 
+    fontWeight: "500", 
   },
   // Lista de Categorías
   categoryItemsContainer: {
-    flexDirection: "row", // flex-row
-    flexWrap: "wrap", // flex-wrap
-    justifyContent: "space-between", // justify-between
-    marginTop: 16, // mt-4
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    justifyContent: "space-between", 
+    marginTop: 16, 
     marginHorizontal: 16,
   },
   categoryItem: {
-    alignItems: "center", // items-center
-    width: "25%", // w-1/4
-    marginBottom: 16, // mb-4
+    alignItems: "center", 
+    width: "25%", 
+    marginBottom: 16, 
   },
   categoryIconWrapper: {
-    backgroundColor: "#faf1ef", // bg-amber-50
-    padding: 8, // p-2
-    borderRadius: 9999, // rounded-full
-    width: 56, // w-14 (14 * 4)
-    height: 56, // h-14
+    backgroundColor: "#faf1ef",
+    padding: 8, 
+    borderRadius: 9999, 
+    width: 56, 
+    height: 56,
     justifyContent: "center",
     alignItems: "center",
   },
   categoryIconImage: {
-    width: 24, // inline override
+    width: 24, 
     height: 24,
   },
   categoryItemTitle: {
-    marginTop: 8, // mt-2
-    fontSize: 12, // text-xs
-    color: "#4b5563", // text-gray-600
-    textAlign: "center", // text-center
+    marginTop: 8, 
+    fontSize: 12, 
+    color: "#4b5563", 
+    textAlign: "center", 
   },
   // Sección Flash Sale
   flashSaleSection: {
-    marginTop: 24, // mt-6
-    paddingHorizontal: 16, // px-4
+    marginTop: 24, 
+    paddingHorizontal: 16, 
   },
   flashSaleHeaderRow: {
     flexDirection: "row",
@@ -767,45 +769,45 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   flashSaleTitle: {
-    fontSize: 18, // text-lg
-    fontWeight: "600", // font-semibold
-    color: "#000", // color predeterminado
+    fontSize: 18, 
+    fontWeight: "600", 
+    color: "#000", 
   },
   flashSaleTimerText: {
-    fontSize: 12, // text-xs
-    color: "#6b7280", // text-gray-500
+    fontSize: 12, 
+    color: "#6b7280", 
     display: 'flex',
     alignItems: 'center'
   },
   filterScrollView: {
-    marginTop: 16, // mt-4
+    marginTop: 16, 
   },
   filterRow: {
     flexDirection: "row",
   },
   filterButtonWrapper: {
-    // Se controla el margen derecho de forma condicional
+
   },
   filterButton: {
-    paddingHorizontal: 16, // px-4
-    paddingVertical: 8, // py-2
-    borderRadius: 9999, // rounded-full
+    paddingHorizontal: 16, 
+    paddingVertical: 8, 
+    borderRadius: 9999, 
   },
   filterButtonActive: {
-    backgroundColor: "#78350f", // bg-amber-900
+    backgroundColor: "#78350f", 
   },
   filterButtonInactive: {
     borderWidth: 1,
-    borderColor: "#e5e7eb", // border-gray-200
+    borderColor: "#e5e7eb",
   },
   filterButtonText: {
-    fontSize: 14, // text-sm
+    fontSize: 14,
   },
   filterButtonTextActive: {
-    color: "#fff", // text-white
+    color: "#fff", 
   },
   filterButtonTextInactive: {
-    color: "#374151", // text-gray-700
+    color: "#374151",
   },
   // Grid de Productos
   productGrid: {
@@ -815,63 +817,63 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   productCard: {
-    width: "48%", // w-[48%]
-    marginVertical: 16, // my-4
-    backgroundColor: "#fff", // bg-white
-    padding: 8, // p-2
-    borderRadius: 12, // rounded-xl (aprox.)
-    alignItems: "center", // items-center
+    width: "48%", 
+    marginVertical: 16, 
+    backgroundColor: "#fff", 
+    padding: 8, 
+    borderRadius: 12, 
+    alignItems: "center", 
   },
   productImage: {
     width: 160,
     height: 160,
-    borderRadius: 8, // rounded-lg
-    marginBottom: 8, // mb-2
+    borderRadius: 8, 
+    marginBottom: 8, 
   },
   productName: {
-    color: "#1f2937", // text-gray-800
-    fontWeight: "600", // font-semibold
+    color: "#1f2937", 
+    fontWeight: "600", 
     textAlign: "center",
   },
   productPrice: {
-    color: "#78350f", // text-amber-900
-    fontWeight: "bold", // font-bold
+    color: "#78350f", 
+    fontWeight: "bold", 
     textAlign: "center",
-    marginTop: 4, // mt-1
+    marginTop: 4,
   },
   productTagsContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 8, // mt-2
+    marginTop: 8,
   },
   productTag: {
-    paddingHorizontal: 8, // px-2
-    paddingVertical: 4, // py-1
-    backgroundColor: "#faf1ef", // bg-amber-50
-    borderRadius: 9999, // rounded-full
-    marginRight: 4, // separación entre etiquetas
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    backgroundColor: "#faf1ef", 
+    borderRadius: 9999,
+    marginRight: 4, 
   },
   productTagText: {
-    fontSize: 12, // text-xs
-    color: "#78350f", // text-amber-900
+    fontSize: 12, 
+    color: "#78350f", 
   },
   // Mensaje de Productos No Encontrados
   noProductsContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 48, // mt-12
+    marginTop: 48, 
   },
   noProductsText: {
-    color: "#6b7280", // text-gray-500
-    fontSize: 18, // text-lg
-    marginTop: 16, // mt-4
+    color: "#6b7280", 
+    fontSize: 18, 
+    marginTop: 16, 
     textAlign: "center",
   },
   // Barra de Navegación Inferior
   bottomNavWrapper: {
-    position: "absolute", // No existe "sticky" en RN, se usa absolute
-    bottom: 16, // m-4
+    position: "absolute", 
+    bottom: 16, 
     left: 16,
     right: 16,
   },
@@ -893,28 +895,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bottomNavItemButton: {
-    padding: 8, // p-2
-    borderRadius: 9999, // rounded-full
+    padding: 8,
+    borderRadius: 9999, 
   },
   bottomNavItemButtonActive: {
-    backgroundColor: "#faf1ef", // bg-amber-50
+    backgroundColor: "#faf1ef", 
   },
   bottomNavIcon: {
-    padding: 8, // p-2
-    borderRadius: 9999, // rounded-full
+    padding: 8, 
+    borderRadius: 9999, 
   },
   bottomNavIconActive: {
-    backgroundColor: "#faf1ef", // bg-amber-50
+    backgroundColor: "#faf1ef", 
   },
   parentTimer: {
-    backgroundColor: "#faf1ef", // bg-amber-50
-    padding: 8, // p-2 (8px)
-    borderRadius: 6, // rounded-md (~6px)
-    alignItems: "center", // items-center
-    marginHorizontal: 4, // mx-1 (4px)
+    backgroundColor: "#faf1ef", 
+    padding: 8,
+    borderRadius: 6,
+    alignItems: "center", 
+    marginHorizontal: 4, 
   },
   timeChild: {
-    color: "#78350f", // color-amber-900
+    color: "#78350f", 
   },
   containerTImeBox: {
     flexDirection: 'row',

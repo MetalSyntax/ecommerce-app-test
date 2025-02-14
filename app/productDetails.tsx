@@ -6,7 +6,9 @@ import {
   Image,
   TouchableOpacity,
   Animated,
-  StyleSheet
+  StyleSheet,
+  StatusBar,
+  Modal
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link, useLocalSearchParams, useRouter } from "expo-router";
@@ -21,7 +23,11 @@ const products = [
     rating: "4.5",
     category: "Female's Style",
     description:
-      "A stylish and comfortable light brown jacket, perfect for any season.",
+      "A stylish and comfortable light brown jacket, perfect for any season. Made from soft and breathable materials, it provides the ideal balance between warmth and lightness. Its versatile design makes it easy to pair with different outfits, from casual to sophisticated looks.",
+    features: "Designed for modern wear, this light brown jacket features a minimalist and sleek design.",
+    comfort: "Soft-touch fabric ensures a smooth feel against your skin, making it perfect for all-day wear.",
+    material: "Crafted with a breathable cotton blend, offering durability and style in one.",
+    versatility: "Great for both urban streetwear and semi-formal occasions.",
     sizes: ["S", "M", "L", "XL", "XXL", "XXXL"],
     color: "Brown",
     mainImage: require("../assets/products/jacket-woman-1.jpg"),
@@ -37,8 +43,11 @@ const products = [
     price: "$99.99",
     rating: "4.8",
     category: "Unisex Fashion",
-    description:
-      "A premium black leather jacket that brings style and durability.",
+    description: "A premium black leather jacket that combines style and durability. Crafted from high-quality materials, it offers a perfect fit and an elegant finish. Ideal for any occasion, from casual gatherings to night outs.",
+    features: "Featuring functional pockets and carefully crafted details, this jacket is a must-have for any wardrobe.",
+    comfort: "Its lined interior provides extra comfort, while its timeless design ensures it never goes out of style.",
+    material: "Made from premium black leather, this jacket combines style and durability for long-lasting wear.",
+    versatility: "Perfect for casual and formal occasions, it pairs well with jeans or dress pants.",
     sizes: ["S", "M", "L", "XL", "XXL", "XXXL"],
     color: "Black",
     mainImage: require("../assets/products/jacket-men-1.jpg"),
@@ -89,6 +98,7 @@ export default function ProductDetails( ) {
 
   const router = useRouter();
 
+  const [modalVisible, setModalVisible] = useState(false);
   
   const [selectedSize, setSelectedSize] = useState("S");
 
@@ -144,6 +154,7 @@ export default function ProductDetails( ) {
   if (!product) {
     return (
       <SafeAreaView style={styles.container}>
+      {/* Header Back Button */}
       <View style={styles.header}>
         <Link href="/" asChild>
           <TouchableOpacity style={styles.backButton} activeOpacity={0.8}>
@@ -151,7 +162,7 @@ export default function ProductDetails( ) {
           </TouchableOpacity>
         </Link>
       </View>
-
+      {/* Content Message*/}
       <View style={styles.content}>
         <Text style={styles.title}>
           Oops! We couldn't find that product
@@ -159,13 +170,11 @@ export default function ProductDetails( ) {
         <Text style={styles.subtitle}>
           Looks like this item got away. Check out these great alternatives instead!
         </Text>
-
+        {/* Trending Content*/}
         <View style={styles.trendingContainer}>
           <Text style={styles.trendingTitle}>Trending products</Text>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.scrollContainer}
+          <View
+            style={styles.scrollContainer}
           >
             {recommendedProducts.map((product) => (
               <Link
@@ -183,7 +192,7 @@ export default function ProductDetails( ) {
                 </TouchableOpacity>
               </Link>
             ))}
-          </ScrollView>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -192,6 +201,7 @@ export default function ProductDetails( ) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+    <StatusBar translucent backgroundColor="transparent" />
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         style={styles.scrollView}
@@ -268,7 +278,43 @@ export default function ProductDetails( ) {
       <Text style={styles.productNameFull}>{product.name}</Text>
 
       <Text style={styles.sectionTitle}>Product Details</Text>
-      <Text style={styles.productDescription}>{product.description}</Text>
+      <Text style={styles.productDescription}>{product.description}
+        {/* Read More Text */}
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Text style={styles.readMoreText}> Read more</Text>
+      </TouchableOpacity>
+       {/* Modal */}
+      <Modal
+        transparent={true}
+        animationType="slide"
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>More Information</Text>
+            <Text style={styles.sectionTitleModal}>Features</Text>
+              <Text style={styles.modalText}>{product.features}</Text>
+
+              <Text style={styles.sectionTitleModal}>Comfort & Fit</Text>
+              <Text style={styles.modalText}>{product.comfort}</Text>
+
+              <Text style={styles.sectionTitleModal}>Material & Quality</Text>
+              <Text style={styles.modalText}>{product.material}</Text>
+
+              <Text style={styles.sectionTitleModal}>Versatility</Text>
+              <Text style={styles.modalText}>{product.versatility}</Text>
+
+            <TouchableOpacity
+              onPress={() => setModalVisible(false)}
+              style={styles.closeButton}
+            >
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      </Text>
 
       <Text style={styles.sectionTitle}>Select Size</Text>
       <View style={styles.sizeContainer}>
@@ -314,115 +360,112 @@ const styles = StyleSheet.create({
   // Empty Product
   container: {
     flex: 1,
-    backgroundColor: '#fff', // bg-white
-    paddingHorizontal: 16,   // px-4 (1rem ≈ 16px)
+    backgroundColor: '#fff',
   },
   header: {
-    flexDirection: 'row',        // flex-row
-    alignItems: 'center',        // items-center
-    justifyContent: 'space-between', // justify-between
-    marginBottom: 32,            // mb-8 (8 x 4px)
-    paddingTop: 16,              // pt-4
-    marginHorizontal: 16,        // mx-4
+    flexDirection: 'row',        
+    alignItems: 'center',       
+    justifyContent: 'space-between', 
+    marginBottom: 32,            
+    paddingTop: 16,              
+    marginHorizontal: 16,        
   },
   backButton: {
-    backgroundColor: '#f9fafb', // bg-gray-50
-    padding: 12,               // p-3
-    borderRadius: 9999,        // rounded-full
+    backgroundColor: '#f9fafb',
+    padding: 12,               
+    borderRadius: 9999,        
   },
   content: {
     flex: 1,
-    justifyContent: 'center', // justify-center
-    alignItems: 'center',     // items-center
-    marginHorizontal: 16,     // mx-4
+    justifyContent: 'center', 
+    alignItems: 'center',     
+    marginHorizontal: 16,     
   },
   title: {
-    fontSize: 24,             // text-2xl (aprox. 24px)
-    fontWeight: 'bold',       // font-bold
-    color: '#1f2937',         // text-gray-800
-    marginBottom: 8,          // mb-2
-    textAlign: 'center',      // text-center
+    fontSize: 24,             
+    fontWeight: 'bold',       
+    color: '#1f2937',         
+    marginBottom: 8,          
+    textAlign: 'center',      
   },
   subtitle: {
-    fontSize: 18,             // text-lg (aprox. 18px)
-    color: '#4b5563',         // text-gray-600
-    textAlign: 'center',      // text-center
-    marginBottom: 32,         // mb-8
-    paddingHorizontal: 32,    // px-8
+    fontSize: 18,            
+    color: '#4b5563',         
+    textAlign: 'center',      
+    marginBottom: 32,         
+    paddingHorizontal: 32,    
   },
   trendingContainer: {
-    width: '100%',            // w-full
-    marginBottom: 32,         // mb-8
+    width: '100%',            
+    marginBottom: 32,        
   },
   trendingTitle: {
-    fontSize: 20,             // text-xl (aprox. 20px)
-    fontWeight: '600',        // font-semibold
-    color: '#1f2937',         // text-gray-800
-    marginBottom: 16,         // mb-4
+    fontSize: 20,             
+    fontWeight: '600',        
+    color: '#1f2937',         
+    marginBottom: 16,         
   },
   scrollContainer: {
-    flexDirection: 'row',     // flex-row
-    justifyContent: 'center', // justify-center
+    flexDirection: 'row',     
+    justifyContent: 'space-between', 
   },
   productCard: {
-    borderRadius: 12,         // rounded-xl (aprox. 12px)
-    padding: 16,              // p-4
-    marginRight: 16,          // mr-4
+    borderRadius: 12,         
     alignItems: 'center',
   },
   productImage: {
-    borderRadius: 8,          // rounded-lg (aprox. 8px)
-    marginBottom: 8,          // mb-2
+    borderRadius: 8,          
+    marginBottom: 8,          
   },
   productName: {
-    fontWeight: '500',        // font-medium
-    color: '#1f2937',         // text-gray-800
+    fontWeight: '500',        
+    color: '#1f2937',       
     textAlign: 'center',
   },
   productPrice: {
-    color: '#3b82f6',         // text-primary (se asume un tono azul)
-    fontWeight: 'bold',       // font-bold
+    color: '#6a4c38',         
+    fontWeight: 'bold',      
     textAlign: 'center',
   },
 
   // Float Button
   bottomBar: {
-    position: 'absolute', // Emula "sticky bottom-0 left-0 right-0"
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#fff', // bg-white
-    padding: 16,            // p-4 (16px aprox.)
-    borderWidth: 1,         // border
-    borderColor: '#e5e7eb',  // border-gray-200
+    backgroundColor: '#fff',
+    padding: 16,            
+    borderWidth: 1,         
+    borderColor: '#e5e7eb',  
   },
   bottomBarContent: {
-    flexDirection: 'row',       // flex-row
-    alignItems: 'center',       // items-center
-    justifyContent: 'space-between', // justify-between
+    flexDirection: 'row',       
+    alignItems: 'center',      
+    justifyContent: 'space-between', 
   },
   totalPriceLabel: {
-    fontSize: 12,         // text-xs (aprox. 12px)
-    color: '#6b7280',     // text-gray-500
+    fontSize: 12,         
+    color: '#6b7280',    
   },
   totalPriceValue: {
-    fontSize: 18,         // text-lg (aprox. 18px)
-    fontWeight: '600',    // font-semibold
-    color: '#1f2937',     // text-gray-800
+    fontSize: 18,         
+    fontWeight: '600',   
+    color: '#1f2937',     
   },
   addToCartButton: {
-    backgroundColor: '#78350f', // bg-yellow-900 (ajusta según tu paleta)
-    paddingVertical: 12,        // py-3 (aprox. 12px)
-    paddingHorizontal: 32,      // px-8 (aprox. 32px)
-    borderRadius: 9999,         // rounded-full
-    width: '70%',               // w-[70%]
-    flexDirection: 'row',       // flex-row
-    alignItems: 'center',       // items-center
-    justifyContent: 'center',   // justify-center
+    backgroundColor: '#78350f', 
+    paddingVertical: 12,       
+    paddingHorizontal: 32,      
+    borderRadius: 9999,         
+    width: '70%',               
+    flexDirection: 'row',       
+    alignItems: 'center',       
+    justifyContent: 'center',   
   },
   addToCartText: {
-    color: '#fff',   // text-white
-    marginLeft: 8,   // ml-2 (8px aprox.)
+    color: '#fff',  
+    marginLeft: 8,   
   },
   // Header
   containerFull: {
@@ -434,132 +477,180 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
   backButtonFull: {
-    backgroundColor: '#f9fafb', // bg-gray-50
-    padding: 8, // p-2
-    borderRadius: 9999, // rounded-full
+    backgroundColor: '#f9fafb', 
+    padding: 8, 
+    borderRadius: 9999,
   },
   titleFull: {
-    fontSize: 18, // text-lg
-    fontWeight: '600', // font-semibold
+    fontSize: 18,
+    fontWeight: '600',
     backgroundColor: '#ffffff7a',
   },
   heartButton: {
-    padding: 8, // p-2
-    borderRadius: 9999, // rounded-full
+    padding: 8, 
+    borderRadius: 9999, 
   },
   filledHeart: {
-    backgroundColor: '#fee2e2', // bg-red-50
+    backgroundColor: '#fee2e2', 
   },
   emptyHeart: {
-    backgroundColor: '#f9fafb', // bg-gray-50
+    backgroundColor: '#f9fafb',
   },
   // Images and content
   mainImage: {
     width: 450,
-    height: 600,
-    borderRadius: 8, // rounded-lg
-    marginTop: 16, // mt-4
-    top: -90, // relative top-[-90px]
-    alignSelf: 'center', // mx-auto
+    height: 450,
+    borderRadius: 8, 
+    marginTop: 16, 
+    top: -90, 
+    alignSelf: 'center', 
   },
   previewScrollView: {
-    marginTop: 16, // mt-4
-    top: -180, // relative top-[-180px]
-    borderRadius: 6, // rounded-md
-    alignSelf: 'center', // Centrado horizontal, similar a "margin: 0 auto;"
+    marginTop: 16,
+    top: -180, 
+    borderRadius: 6,
+    alignSelf: 'center', 
   },
   previewImageContainer: {
-    borderWidth: 4, // border-4
-    borderRadius: 6, // rounded-md
+    borderWidth: 4, 
+    borderRadius: 6, 
   },
   activePreviewBorder: {
-    borderColor: '#78350f', // border-amber-900
+    borderColor: '#78350f', 
   },
   inactivePreviewBorder: {
-    borderColor: '#ffffff', // border-white
+    borderColor: '#ffffff', 
   },
   previewImage: {
     width: 48,
     height: 48,
-    borderRadius: 6, // rounded-md
+    borderRadius: 6,
   },
   productInfoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: -140, // -mt-[140px]
+    marginTop: -140, 
   },
   productCategory: {
-    marginHorizontal: 16, // mx-4
-    color: '#6b7280', // text-gray-500
+    marginHorizontal: 16, 
+    color: '#6b7280', 
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 16, // mx-4
+    marginHorizontal: 16,
   },
   starIcon: {
     width: 12,
     height: 12,
   },
   productRating: {
-    color: '#6b7280', // text-gray-500
+    color: '#6b7280', 
   },
   productNameFull: {
-    fontSize: 20, // text-xl
-    fontWeight: '600', // font-semibold
-    marginTop: 16, // mt-4
-    marginHorizontal: 16, // mx-4
+    fontSize: 20, 
+    fontWeight: '600', 
+    marginTop: 16, 
+    marginHorizontal: 16, 
   },
   sectionTitle: {
-    fontWeight: '700', // font-bold
-    marginTop: 16, // mt-4
-    marginHorizontal: 16, // mx-4
+    fontWeight: '700', 
+    marginTop: 16,
+    marginHorizontal: 16, 
   },
   productDescription: {
-    marginTop: 8, // mt-2
-    marginHorizontal: 16, // mx-4
-    color: '#374151', // text-gray-700
-    borderBottomWidth: 1, // border-b
-    borderBottomColor: '#e5e7eb', // border-gray-200
-    paddingBottom: 16, // pb-4
+    marginTop: 8, 
+    marginHorizontal: 16, 
+    color: '#374151', 
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb', 
+    paddingBottom: 16, 
   },
   sizeContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginTop: 8, // mt-2
-    marginHorizontal: 16, // mx-4
+    marginTop: 8, 
+    marginHorizontal: 16, 
   },
   sizeButton: {
-    padding: 8, // p-2
-    borderRadius: 6, // rounded-md
-    margin: 4, // m-1
+    padding: 8, 
+    borderRadius: 6, 
+    margin: 4, 
   },
   selectedSizeButton: {
-    backgroundColor: '#78350f', // bg-amber-900
+    backgroundColor: '#78350f',
   },
   unselectedSizeButton: {
-    backgroundColor: '#ffffff', // bg-white
-    borderWidth: 1, // border
-    borderColor: '#e5e7eb', // border-gray-200
+    backgroundColor: '#ffffff',
+    borderWidth: 1, 
+    borderColor: '#e5e7eb', 
   },
   selectedSizeText: {
-    color: '#ffffff', // text-white
+    color: '#ffffff', 
   },
   unselectedSizeText: {
-    color: '#000000', // text-black
+    color: '#000000', 
   },
-  //
+  //Main
   safeArea: {
-    flex: 1, // flex-1
-    backgroundColor: '#ffffff', // bg-white
+    flex: 1, 
+    backgroundColor: '#ffffff', 
   },
   scrollView: {
-    backgroundColor: '#ffffff', // bg-white
-    marginBottom: 82, // margin bottom de 82px
+    backgroundColor: '#ffffff', 
+    marginBottom: 82, 
   },
   scrollViewContent: {
-    paddingBottom: 20, // paddingBottom: 20
+    paddingBottom: 20, 
+  },
+  //Read More
+  readMoreText: {
+    color: "#78350f",
+    fontWeight: "600",
+    textDecorationLine: "underline",
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+    fontFamily: 'sans-serif'
+  },
+  sectionTitleModal: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 15,
+    fontFamily: 'sans-serif'
+  },
+  modalText: {
+    fontSize: 14,
+    color: "#666",
+    marginTop: 5,
+    fontFamily: 'sans-serif'
+  },
+  closeButton: {
+    marginTop: 20,
+    backgroundColor: "#78350f",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    fontFamily: 'sans-serif'
+  },
+  closeButtonText: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
