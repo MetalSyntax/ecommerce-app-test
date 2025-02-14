@@ -34,7 +34,7 @@ A powerful mobile e-commerce app built with **Expo Router** and styles, implemen
 - **StyleSheet (CSS)** - Styling
 - **React Navigation** - Navigation
 - **React Native Reanimated** - Animations
-- **React Native Vector Icons** - Iconography
+- **React Native Vector Icons** - FontAwesome
 - **Expo/Vector-Icons** - Built-in icons
 
 ## 🚀 Installation & Usage
