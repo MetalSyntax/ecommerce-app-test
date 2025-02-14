@@ -1,6 +1,6 @@
-# 🛍️ E-Commerce Mobile App with Expo Router + Tailwind CSS
+# 🛍️ E-Commerce Mobile App with Expo Router
 
-A powerful mobile e-commerce app built with **Expo Router** and styled with **Nativewind** (Tailwind CSS for React Native), implementing modern UI/UX best practices and development patterns.
+A powerful mobile e-commerce app built with **Expo Router** and styles, implementing modern UI/UX best practices and development patterns.
 
 ## ✨ Key Features
 
@@ -30,7 +30,7 @@ A powerful mobile e-commerce app built with **Expo Router** and styled with **Na
 ## 🛠️ Technologies Used
 
 - **Expo Router** - Native routing
-- **Nativewind (Tailwind CSS)** - Styling
+- **StyleSheet (CSS)** - Styling
 - **React Navigation** - Navigation
 - **React Native Reanimated** - Animations
 - **React Native Vector Icons** - Iconography
