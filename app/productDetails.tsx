@@ -35,6 +35,8 @@ const products = [
       require("../assets/products/jacket-woman-1.png"),
       require("../assets/products/jacket-woman-2.png"),
       require("../assets/products/jacket-woman-3.png"),
+      require("../assets/products/jacket-woman-4.png"),
+      require("../assets/products/jacket-woman-5.png"),
     ],
   },
   {
@@ -55,6 +57,7 @@ const products = [
       require("../assets/products/jacket-men-1.png"),
       require("../assets/products/jacket-men-2.png"),
       require("../assets/products/jacket-men-3.png"),
+      require("../assets/products/jacket-men-4.png"),
     ],
   },
 ];
