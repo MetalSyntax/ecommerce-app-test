@@ -71,10 +71,33 @@ export default StyleSheet.create({
         color: "#78350f",
         fontWeight: "600",
       },
+      overlay: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "transparent",
+        zIndex: 0,
+      },
       notificationBadge: {
-        backgroundColor: "#f9fafb",
-        padding: 8,
-        borderRadius: 9999,
+        position: "relative",
+        padding: 10,
+        zIndex: 1,
+      },
+      badge: {
+        position: "absolute",
+        top: 50,
+        right: -10,
+        backgroundColor: "white",
+        borderRadius: 10,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        width: 150
+      },
+      badgeText: {
+        color: "black",
+        fontSize: 16,
       },
       // Search
       searchBarContainer: {
@@ -296,6 +319,7 @@ export default StyleSheet.create({
         height: 160,
         borderRadius: 8, 
         marginBottom: 8, 
+        backgroundColor: "#eadfdc"
       },
       productName: {
         color: "#1f2937", 

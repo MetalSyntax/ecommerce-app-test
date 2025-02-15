@@ -30,11 +30,11 @@ const products = [
     versatility: "Great for both urban streetwear and semi-formal occasions.",
     sizes: ["S", "M", "L", "XL", "XXL", "XXXL"],
     color: "Brown",
-    mainImage: require("../assets/products/jacket-woman-1.jpg"),
+    mainImage: require("../assets/products/jacket-woman-1.png"),
     previewImages: [
-      require("../assets/products/jacket-woman-1.jpg"),
-      require("../assets/products/jacket-woman-2.jpg"),
-      require("../assets/products/jacket-woman-3.jpg"),
+      require("../assets/products/jacket-woman-1.png"),
+      require("../assets/products/jacket-woman-2.png"),
+      require("../assets/products/jacket-woman-3.png"),
     ],
   },
   {
@@ -50,11 +50,11 @@ const products = [
     versatility: "Perfect for casual and formal occasions, it pairs well with jeans or dress pants.",
     sizes: ["S", "M", "L", "XL", "XXL", "XXXL"],
     color: "Black",
-    mainImage: require("../assets/products/jacket-men-1.jpg"),
+    mainImage: require("../assets/products/jacket-men-1.png"),
     previewImages: [
-      require("../assets/products/jacket-men-1.jpg"),
-      require("../assets/products/jacket-men-2.jpg"),
-      require("../assets/products/jacket-men-3.jpg"),
+      require("../assets/products/jacket-men-1.png"),
+      require("../assets/products/jacket-men-2.png"),
+      require("../assets/products/jacket-men-3.png"),
     ],
   },
 ];
@@ -64,13 +64,13 @@ const recommendedProducts = [
     id: "1",
     name: "Light Brown Jacket",
     price: "$83.97",
-    image: require("../assets/products/jacket-woman-1.jpg"),
+    image: require("../assets/products/jacket-woman-1.png"),
   },
   {
     id: "2",
     name: "Black Leather Jacket",
     price: "$99.99",
-    image: require("../assets/products/jacket-men-1.jpg"),
+    image: require("../assets/products/jacket-men-1.png"),
   },
 ];
 
@@ -220,7 +220,7 @@ export default function ProductDetails( ) {
         contentContainerStyle={styles.scrollViewContent}
         style={styles.scrollView}
       >
-        <View style={styles.containerFull}>
+      <View style={styles.containerFull}>
       <Link href="/" asChild>
         <TouchableOpacity style={styles.backButtonFull}>
           <FontAwesome name="arrow-left" size={24} color="black" />
@@ -247,6 +247,8 @@ export default function ProductDetails( ) {
         <Image
           source={mainImage}
           style={styles.mainImage}
+          resizeMode="contain"
+          resizeMethod="resize"
           onError={() => console.warn('Failed to load main image')}
         />
       )}

@@ -10,6 +10,7 @@ import {
   Dimensions,
   ImageBackground,
   StatusBar,
+  TouchableWithoutFeedback
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
@@ -63,14 +64,14 @@ const products = [
     id: "1",
     name: "Light Brown Jacket",
     price: "$83.97",
-    image: require("../assets/products/jacket-woman-1.jpg"),
+    image: require("../assets/products/jacket-woman-1.png"),
     tags: ["Newest", "Woman"],
   },
   {
     id: "2",
     name: "Black Leather Jacket",
     price: "$99.99",
-    image: require("../assets/products/jacket-men-1.jpg"),
+    image: require("../assets/products/jacket-men-1.png"),
     tags: ["Newest", "Man"],
   },
   {
@@ -186,7 +187,7 @@ export default function Home() {
 
   const scaleValue = new Animated.Value(1);
 
-  const handlePress = (tabName: string) => {
+  const handlePressNav = (tabName: string) => {
     Animated.sequence([
       Animated.spring(scaleValue, {
         toValue: 0.8,
@@ -241,6 +242,17 @@ export default function Home() {
   const filteredProducts = filterProducts(products, selectedFilter).filter(
     (product) => product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const [showBadge, setShowBadge] = useState(false);
+
+  const handlePressNotfication = () => {
+    setShowBadge((prev) => !prev);
+  };
+
+  const closeBadge = () => {
+    setShowBadge(false);
+  };
+
 
   return (
     <SafeAreaView style={styles.safeAreaViewMain}>
@@ -298,9 +310,21 @@ export default function Home() {
             )}
           </View>
 
-          <View style={styles.notificationBadge}>
-            <FontAwesome name="bell" size={24} color="#5b4f45" />
-          </View>
+        {showBadge && (
+            <TouchableWithoutFeedback onPress={closeBadge}>
+              <View style={styles.overlay} />
+            </TouchableWithoutFeedback>
+          )}
+          <TouchableOpacity onPress={handlePressNotfication}>
+            <View style={styles.notificationBadge}>
+              <FontAwesome name="bell" size={24} color="#5b4f45" />
+              {showBadge && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>No notifications</Text>
+                </View>
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.searchBarContainer}>
@@ -525,7 +549,7 @@ export default function Home() {
             return (
               <TouchableOpacity
                 key={tab.name}
-                onPress={() => handlePress(tab.name)}
+                onPress={() => handlePressNav(tab.name)}
                 activeOpacity={0.8}
                 style={styles.bottomNavItem}
               >

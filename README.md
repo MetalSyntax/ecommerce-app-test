@@ -5,7 +5,7 @@ A powerful mobile e-commerce app built with **Expo Router** and styles, implemen
 ## ✨ Key Features
 
 - **🏷️ Advanced Filtering System**
-  - Real-time search 
+  - Real-time search
   - Dynamic Tags filtering
 
 - **🖼️ Interactive Product Gallery**
@@ -18,7 +18,8 @@ A powerful mobile e-commerce app built with **Expo Router** and styles, implemen
   - Button animations (Like)
   - Responsive design for all devices
   - Dynamic Counter for Flash Sale
-  - Switch Location List 
+  - Switch Location List
+  - Notification Badget
 
 - **🚀 Optimized Performance**
   - Smooth navigation with Expo Router
@@ -53,6 +54,12 @@ yarn install
 3. **Run on iOS/Android**
 ```bash
 npx expo start
+# or
+npm run start
+```
+4. **Deploy to Production (Make APK)**
+```bash
+eas build --platform android
 ```
 
 ## 🤝 Contribution

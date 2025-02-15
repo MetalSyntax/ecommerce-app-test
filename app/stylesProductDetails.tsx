@@ -15,7 +15,7 @@ export default StyleSheet.create({
     marginHorizontal: 16,        
   },
   backButton: {
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#fbfefb',
     padding: 12,               
     borderRadius: 9999,        
   },
@@ -59,7 +59,8 @@ export default StyleSheet.create({
   },
   productImage: {
     borderRadius: 8,          
-    marginBottom: 8,          
+    marginBottom: 8,       
+    backgroundColor: "#eadfdc"   
   },
   productName: {
     fontWeight: '500',        
@@ -117,11 +118,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     zIndex: 10,
-    marginHorizontal: 16,
-    marginVertical: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    backgroundColor: "#eee7dc"
   },
   backButtonFull: {
-    backgroundColor: '#f9fafb', 
+    backgroundColor: '#fbfefb', 
     padding: 8, 
     borderRadius: 9999,
   },
@@ -130,10 +132,6 @@ export default StyleSheet.create({
     fontWeight: '600',
     padding: 5,
     borderRadius: 5,
-    backgroundColor: '#ffffff7a',
-    textShadowColor: 'rgba(0,0,0,0.3)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
   },
   heartButton: {
     padding: 8, 
@@ -147,22 +145,24 @@ export default StyleSheet.create({
   },
   // Images and content
   mainImage: {
-    width: 450,
-    height: 450,
+    width: 1280,
+    height: 400,
     borderRadius: 8, 
     marginTop: 16, 
-    top: -90, 
+    top: -20, 
     alignSelf: 'center', 
+    backgroundColor: "#eee7dc",
+    backgroundPosition: "top"
   },
   previewScrollView: {
     marginTop: 16,
-    top: -180, 
+    top: -110, 
     borderRadius: 6,
     alignSelf: 'center', 
   },
   previewImageContainer: {
     borderWidth: 4, 
-    borderRadius: 6, 
+    borderRadius: 0, 
   },
   activePreviewBorder: {
     borderColor: '#704f38', 
@@ -173,13 +173,14 @@ export default StyleSheet.create({
   previewImage: {
     width: 48,
     height: 48,
-    borderRadius: 6,
+    borderRadius: 0,
+    backgroundColor: "#eee7dc"
   },
   productInfoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: -140, 
+    marginTop: -60, 
   },
   productCategory: {
     marginHorizontal: 16, 
