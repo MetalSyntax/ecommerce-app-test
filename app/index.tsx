@@ -64,6 +64,7 @@ const products = [
     id: "1",
     name: "Light Brown Jacket",
     price: "$83.97",
+    oldPrice: "$93.97",
     image: require("../assets/products/jacket-woman-1.png"),
     tags: ["Newest", "Woman"],
   },
@@ -71,6 +72,7 @@ const products = [
     id: "2",
     name: "Black Leather Jacket",
     price: "$99.99",
+    oldPrice: "$109.99",
     image: require("../assets/products/jacket-men-1.png"),
     tags: ["Newest", "Man"],
   },
@@ -524,7 +526,9 @@ export default function Home() {
                       resizeMode="cover"
                     />
                     <Text style={styles.productName}>{product.name}</Text>
-                    <Text style={styles.productPrice}>{product.price}</Text>
+                    {product.oldPrice ?
+                    <Text style={styles.productPrice}>{product.price} - <Text style={styles.productOldPrice}>{product.oldPrice}</Text></Text>
+                    : <Text style={styles.productPrice}>{product.price}</Text>}
                     <View style={styles.productTagsContainer}>
                       {product.tags.map((tag) => (
                         <View key={tag} style={styles.productTag}>

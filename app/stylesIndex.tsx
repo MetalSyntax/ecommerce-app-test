@@ -5,9 +5,9 @@ export default StyleSheet.create({
         flex: 1,
       },
       scrollViewMain: {
-        backgroundColor: "#fff",
+        backgroundColor: "transparent",
         paddingVertical: 4,
-        marginBottom: 90,
+        marginBottom: 65,
       },
       //Header
       headerContainer: {
@@ -337,6 +337,13 @@ export default StyleSheet.create({
         textAlign: "center",
         marginTop: 4,
       },
+      productOldPrice: {
+        color: "#807c77", 
+        fontWeight: "400", 
+        textAlign: "center",
+        marginTop: 4,
+        textDecorationLine: 'line-through'
+      },
       productTagsContainer: {
         flexDirection: "row",
         justifyContent: "center",
@@ -369,14 +376,14 @@ export default StyleSheet.create({
       // Barra de Navegación Inferior
       bottomNavWrapper: {
         position: "absolute", 
-        bottom: 16, 
+        bottom: 10, 
         left: 16,
         right: 16,
       },
       bottomNavBar: {
         backgroundColor: "#1f1f2b", 
         borderRadius: 9999,
-        padding: 12, 
+        padding: 10, 
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -390,7 +397,7 @@ export default StyleSheet.create({
         alignItems: "center",
       },
       bottomNavItemButton: {
-        padding: 8,
+        padding: 7,
         borderRadius: 9999, 
       },
       bottomNavItemButtonActive: {

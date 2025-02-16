@@ -94,16 +94,22 @@ export default StyleSheet.create({
     color: '#6b7280',    
   },
   totalPriceValue: {
-    fontSize: 18,         
+    fontSize: 16,         
     fontWeight: '600',   
     color: '#1f2937',     
+  },
+  totalOldPriceValue : {
+    fontSize: 12,         
+    fontWeight: '400',   
+    color: '#1f2937', 
+    textDecorationLine: 'line-through'   
   },
   addToCartButton: {
     backgroundColor: '#704f38', 
     paddingVertical: 12,       
     paddingHorizontal: 32,      
     borderRadius: 9999,         
-    width: '70%',               
+    width: '60%',               
     flexDirection: 'row',       
     alignItems: 'center',       
     justifyContent: 'center',   
@@ -293,9 +299,11 @@ export default StyleSheet.create({
   },
   closeButton: {
     marginTop: 20,
-    backgroundColor: "#78350f",
+    backgroundColor: "#704f38",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 20,
+    width: "60%",
+    marginHorizontal: 'auto',
     alignItems: "center",
     fontFamily: 'sans-serif'
   },

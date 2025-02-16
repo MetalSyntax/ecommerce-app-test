@@ -20,6 +20,7 @@ const products = [
     id: "1",
     name: "Light Brown Jacket",
     price: "$83.97",
+    oldPrice: "$93.97",
     rating: "4.5",
     category: "Female's Style",
     description:
@@ -43,6 +44,7 @@ const products = [
     id: "2",
     name: "Black Leather Jacket",
     price: "$99.99",
+    oldPrice: "$109.99",
     rating: "4.8",
     category: "Unisex Fashion",
     description: "A premium black leather jacket that combines style and durability. Crafted from high-quality materials, it offers a perfect fit and an elegant finish. Ideal for any occasion, from casual gatherings to night outs.",
@@ -67,12 +69,14 @@ const recommendedProducts = [
     id: "1",
     name: "Light Brown Jacket",
     price: "$83.97",
+    oldPrice: "$93.97",
     image: require("../assets/products/jacket-woman-1.png"),
   },
   {
     id: "2",
     name: "Black Leather Jacket",
     price: "$99.99",
+    oldPrice: "$109.99",
     image: require("../assets/products/jacket-men-1.png"),
   },
 ];
@@ -332,7 +336,9 @@ export default function ProductDetails( ) {
       <View style={styles.bottomBarContent}>
         <View>
           <Text style={styles.totalPriceLabel}>Total Price</Text>
-          <Text style={styles.totalPriceValue}>{product.price}</Text>
+          {product.oldPrice ?
+          <Text style={styles.totalPriceValue}>{product.price} - <Text style={styles.totalOldPriceValue}>{product.oldPrice}</Text></Text>
+          : <Text style={styles.totalPriceValue}>{product.price}</Text>}
         </View>
         <TouchableOpacity style={styles.addToCartButton} activeOpacity={0.8}>
           <FontAwesome name="shopping-bag" size={24} color="#fff" />
