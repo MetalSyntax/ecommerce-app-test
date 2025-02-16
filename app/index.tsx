@@ -420,38 +420,49 @@ export default function Home() {
             <TouchableOpacity
               style={styles.categorySeeAllButton}
               activeOpacity={0.8}
+              onPress={() => {
+                setSelectedFilter("All");
+              }}
             >
               <Text style={styles.categorySeeAllText}>See All</Text>
             </TouchableOpacity>
           </View>
 
           <View>
-            <View style={styles.categoryItemsContainer}>
-              {categories.map((category) => (
-                <TouchableOpacity
-                  key={category.id}
-                  style={styles.categoryItem}
-                  activeOpacity={0.7}
-                >
-                  <View style={styles.categoryIconWrapper}>
-                    <Image
-                      source={category.icon}
-                      style={styles.categoryIconImage}
-                      resizeMode="contain"
-                    />
-                  </View>
-                  <Text style={styles.categoryItemTitle}>{category.title}</Text>
-                </TouchableOpacity>
-              ))}
+          <View style={styles.categoryItemsContainer}>
+        {categories.map((category) => (
+          <TouchableOpacity
+            key={category.title}
+            style={styles.categoryItem}
+            activeOpacity={0.7}
+            onPress={() => {
+              if (selectedFilter === category.title) {
+                setSearchTerm("");
+              } else {
+                setSearchTerm(category.title.toLowerCase());
+              }
+            }}
+          >
+            <View style={styles.categoryIconWrapper}>
+              <Image
+                source={category.icon}
+                style={styles.categoryIconImage}
+                resizeMode="contain"
+              />
             </View>
+            <Text style={styles.categoryItemTitle}>{category.title}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
           </View>
 
           <View style={styles.flashSaleSection}>
             <View style={styles.flashSaleHeaderRow}>
               <Text style={styles.flashSaleTitle}>Flash Sale</Text>
-              <Text style={styles.flashSaleTimerText}>
-                Closing in :<CountdownTimer targetTime={targetTime} />
-              </Text>
+              <View style={styles.flashSaleTimerContainer}>
+                <Text style={styles.flashSaleTimerText}>Closing in: </Text>
+                <CountdownTimer targetTime={targetTime} />
+              </View>
             </View>
 
             <ScrollView

@@ -7,7 +7,7 @@ export default StyleSheet.create({
       scrollViewMain: {
         backgroundColor: "#fff",
         paddingVertical: 4,
-        marginBottom: 120,
+        marginBottom: 90,
       },
       //Header
       headerContainer: {
@@ -268,6 +268,11 @@ export default StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+      },
+      flashSaleTimerContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
       },
       filterScrollView: {
         marginTop: 16, 
